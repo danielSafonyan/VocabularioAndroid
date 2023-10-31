@@ -33,10 +33,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vocabulario.ui.GameModelView
+import com.example.vocabulario.ui.PracticeModelView
 import com.example.vocabulario.ui.components.PracticeCard
 import com.example.vocabulario.ui.theme.VocabularioTheme
 import com.example.vocabulario.R
+import com.example.vocabulario.ui.MainModelView
 import com.example.vocabulario.ui.components.ScreenTitleText
 
 
@@ -45,11 +46,12 @@ import com.example.vocabulario.ui.components.ScreenTitleText
 fun MainScreen(
     modifier: Modifier = Modifier,
     userNickName: String = "Daniel",
+    addNewWordInput: String = "",
+    changedAddNewWordInput: (String) -> Unit = {},
     onPracticeClick: () -> Unit = {},
     onWordListClick: () -> Unit = {},
     onAddWordSubmit: () -> Unit = {}
 ) {
-    var newWord by remember { mutableStateOf("") }
     val context = LocalContext.current
     val helloString = context.resources.getString(R.string.main_screen, userNickName)
     Column (
@@ -58,12 +60,12 @@ fun MainScreen(
     ) {
         ScreenTitleText(helloString)
         OutlinedTextField(
-            value = newWord,
+            value = addNewWordInput,
             placeholder = { Text(text = stringResource(id = R.string.add_word_input_placeholder)) },
             singleLine = true,
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { newWord = it },
+            onValueChange = changedAddNewWordInput,
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
             ),

@@ -95,7 +95,7 @@ fun VocabularioAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VocabularioApp(
-    viewModel: GameModelView = viewModel(),
+    viewModel: MainModelView = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     // Get current back stack entry
@@ -117,6 +117,10 @@ fun VocabularioApp(
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
 
+        fun printWhatYouGet(text: String) {
+            println(text)
+        }
+
         NavHost(
             navController = navController,
             startDestination = VocabularioScreens.Main.name,
@@ -127,6 +131,8 @@ fun VocabularioApp(
         ) {
             composable(route = VocabularioScreens.Main.name) {
                 MainScreen(
+                    addNewWordInput = uiState.addWordInput,
+                    changedAddNewWordInput = { viewModel.updateAddWordInput(it) },
                     onAddWordSubmit = { navController.navigate(VocabularioScreens.AddWord.name) },
                     onPracticeClick = { navController.navigate(VocabularioScreens.Practice.name) },
                     onWordListClick = { navController.navigate(VocabularioScreens.WordList.name) }
@@ -142,37 +148,9 @@ fun VocabularioApp(
                 WordListScreen()
             }
             composable(route = VocabularioScreens.AddWord.name) {
-                AddWordScreen()
+                AddWordScreen(uiState.addWordInput)
+                viewModel.updateAddWordInput("")
             }
         }
     }
 }
-
-/**
- * Resets the [OrderUiState] and pops up to [CupcakeScreen.Start]
- */
-//private fun cancelOrderAndNavigateToStart(
-//    viewModel: OrderViewModel,
-//    navController: NavHostController
-//) {
-//    viewModel.resetOrder()
-//    navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
-//}
-
-/**
- * Creates an intent to share order details
- */
-//private fun shareOrder(context: Context, subject: String, summary: String) {
-//    // Create an ACTION_SEND implicit intent with order details in the intent extras
-//    val intent = Intent(Intent.ACTION_SEND).apply {
-//        type = "text/plain"
-//        putExtra(Intent.EXTRA_SUBJECT, subject)
-//        putExtra(Intent.EXTRA_TEXT, summary)
-//    }
-//    context.startActivity(
-//        Intent.createChooser(
-//            intent,
-//            context.getString(R.string.new_cupcake_order)
-//        )
-//    )
-//}

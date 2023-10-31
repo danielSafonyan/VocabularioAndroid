@@ -4,7 +4,7 @@ import com.example.vocabulario.ui.models.PracticeWordModel
 
 data class PracticeUiState(
     val currentWordIndex: Int = 0,
-    val curentWord: PracticeWordModel = PracticeWordModel("","",""),
+    val currentWord: PracticeWordModel = PracticeWordModel("","",""),
     val score: Int = 0,
     val isGuessedWordWrong: Boolean = false,
     val isGameOver: Boolean = false

@@ -4,9 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -18,39 +16,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vocabulario.ui.GameModelView
+import com.example.vocabulario.ui.PracticeModelView
 import com.example.vocabulario.ui.components.PracticeCard
 import com.example.vocabulario.ui.theme.VocabularioTheme
 
-
-
 @Composable
 fun PracticeScreen(
-    gameViewModel: GameModelView = viewModel()
+    practiceViewModel: PracticeModelView = viewModel()
 ) {
-    val gameUiState by gameViewModel.uiState.collectAsState()
+    val gameUiState by practiceViewModel.uiState.collectAsState()
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         PracticeCard(
-            word = gameUiState.curentWord,
-            userInput = gameViewModel.userWordInput,
-            onInputChanged =  { gameViewModel.updateUserInput(it) },
-            onDoneClicked = { gameViewModel.checkUserInput() }
+            word = gameUiState.currentWord,
+            userInput = practiceViewModel.userWordInput,
+            onInputChanged =  { practiceViewModel.updateUserInput(it) },
+            onDoneClicked = { practiceViewModel.checkUserInput() }
         )
         Row (
             horizontalArrangement = Arrangement.Center
         ) {
             OutlinedButton(
-                onClick = { gameViewModel.skipWord() },
+                onClick = { practiceViewModel.skipWord() },
                 enabled = !gameUiState.isGameOver
             ) {
                 Text(text = "Skip")
             }
             Spacer(modifier = Modifier.width(16.dp))
             Button(
-                onClick = { gameViewModel.checkUserInput() },
+                onClick = { practiceViewModel.checkUserInput() },
                 enabled = !gameUiState.isGameOver
             ) {
                 Text(text = "Submit")
@@ -58,16 +54,6 @@ fun PracticeScreen(
         }
     }
 
-}
-
-@Composable
-fun ScreenTitle(title: String, modifier: Modifier = Modifier) {
-    Text(
-        text = title,
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentWidth(Alignment.CenterHorizontally)
-    )
 }
 
 @Preview(showBackground = true)

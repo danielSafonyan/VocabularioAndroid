@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class GameModelView: ViewModel() {
+class PracticeModelView: ViewModel() {
     private val _uiState = MutableStateFlow(PracticeUiState())
     val uiState: StateFlow<PracticeUiState> = _uiState.asStateFlow()
     var userWordInput by mutableStateOf("")
@@ -28,7 +28,7 @@ class GameModelView: ViewModel() {
     fun updateUserInput(userInput: String) { userWordInput = userInput }
 
     fun setNextWord(){
-        usedWords.add(uiState.value.curentWord)
+        usedWords.add(uiState.value.currentWord)
         if (usedWords.size == allWords.size) {
             _uiState.update {
                 it.copy(
@@ -41,7 +41,7 @@ class GameModelView: ViewModel() {
                 val newWord = allWords[newIndex]
                 it.copy(
                     currentWordIndex = newIndex,
-                    curentWord = newWord
+                    currentWord = newWord
                 )
             }
         }
@@ -49,9 +49,9 @@ class GameModelView: ViewModel() {
     }
 
     fun checkUserInput() {
-        println("uiState.value.curentWord.baseWord: ${uiState.value.curentWord.baseWord}")
+        println("uiState.value.currentWord.baseWord: ${uiState.value.currentWord.baseWord}")
         println("userWordInput: ${userWordInput}")
-        if (uiState.value.curentWord.baseWord == userWordInput) {
+        if (uiState.value.currentWord.baseWord == userWordInput) {
             updateUserInput("")
             setNextWord()
         }
@@ -64,7 +64,7 @@ class GameModelView: ViewModel() {
 
     fun resetGame() {
         usedWords.clear()
-        _uiState.value = PracticeUiState(curentWord = allWords[0])
+        _uiState.value = PracticeUiState(currentWord = allWords[0])
         updateUserInput("")
     }
 }
