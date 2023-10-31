@@ -33,6 +33,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.vocabulario.R
+import com.example.vocabulario.ui.screens.AddWordScreen
 import com.example.vocabulario.ui.screens.MainScreen
 import com.example.vocabulario.ui.screens.PracticeScreen
 import com.example.vocabulario.ui.screens.ProfileScreen
@@ -45,7 +46,8 @@ enum class VocabularioScreens(@StringRes val title: Int) {
     Main(title = R.string.app_name),
     Profile(title = R.string.profile_screen),
     Practice(title = R.string.practice_screen),
-    WordList(title = R.string.word_list_screen)
+    WordList(title = R.string.word_list_screen),
+    AddWord(title = R.string.add_word_screen),
 }
 
 /**
@@ -125,6 +127,7 @@ fun VocabularioApp(
         ) {
             composable(route = VocabularioScreens.Main.name) {
                 MainScreen(
+                    onAddWordSubmit = { navController.navigate(VocabularioScreens.AddWord.name) },
                     onPracticeClick = { navController.navigate(VocabularioScreens.Practice.name) },
                     onWordListClick = { navController.navigate(VocabularioScreens.WordList.name) }
                 )
@@ -137,6 +140,9 @@ fun VocabularioApp(
             }
             composable(route = VocabularioScreens.WordList.name) {
                 WordListScreen()
+            }
+            composable(route = VocabularioScreens.AddWord.name) {
+                AddWordScreen()
             }
         }
     }

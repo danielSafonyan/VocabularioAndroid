@@ -33,9 +33,12 @@ fun PracticeScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        ScreenTitle("Vocabulario MVP")
-        PracticeCard(gameUiState.curentWord, gameViewModel.userWordInput,
-            { gameViewModel.updateUserInput(it) })
+        PracticeCard(
+            word = gameUiState.curentWord,
+            userInput = gameViewModel.userWordInput,
+            onInputChanged =  { gameViewModel.updateUserInput(it) },
+            onDoneClicked = { gameViewModel.checkUserInput() }
+        )
         Row (
             horizontalArrangement = Arrangement.Center
         ) {

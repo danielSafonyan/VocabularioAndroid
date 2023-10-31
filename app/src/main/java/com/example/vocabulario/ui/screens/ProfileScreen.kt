@@ -79,7 +79,7 @@ fun ProfileScreen(
             onValueChange = { wordsPerPractice = it },
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Number
+                keyboardType = KeyboardType.Decimal
             ),
             keyboardActions = KeyboardActions(
                 onDone = {  }

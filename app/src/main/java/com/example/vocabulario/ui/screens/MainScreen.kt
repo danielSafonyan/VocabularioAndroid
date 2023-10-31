@@ -47,6 +47,7 @@ fun MainScreen(
     userNickName: String = "Daniel",
     onPracticeClick: () -> Unit = {},
     onWordListClick: () -> Unit = {},
+    onAddWordSubmit: () -> Unit = {}
 ) {
     var newWord by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -58,7 +59,7 @@ fun MainScreen(
         ScreenTitleText(helloString)
         OutlinedTextField(
             value = newWord,
-            placeholder = { Text(text = stringResource(id = R.string.add_word)) },
+            placeholder = { Text(text = stringResource(id = R.string.add_word_input_placeholder)) },
             singleLine = true,
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
@@ -67,7 +68,7 @@ fun MainScreen(
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {  }
+                onDone = { onAddWordSubmit() }
             )
         )
         Column {

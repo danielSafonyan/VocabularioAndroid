@@ -47,7 +47,8 @@ import com.example.vocabulario.ui.models.PracticeWordModel
 fun PracticeCard(
     word: PracticeWordModel,
     userInput: String,
-    onInputChanged: (String) -> Unit
+    onInputChanged: (String) -> Unit,
+    onDoneClicked: () -> Unit
 ) {
 
     ElevatedCard(
@@ -96,7 +97,7 @@ fun PracticeCard(
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = {  }
+                    onDone = { onDoneClicked() }
                 )
             )
         }

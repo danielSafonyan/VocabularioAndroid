@@ -2,13 +2,15 @@
     <string name="app_name">Vocabulario</string>
     <string name="word_definition">definición</string>
     <string name="word_example">ejemplo</string>
+    <string name="word_base_word">word_base_word</string>
     <string name="main_screen">¡Hola %1$s!</string>
     <string name="profile_screen">¡Tu Perfil!</string>
     <string name="practice_screen">practice_screen</string>
     <string name="word_list_screen">¡Tus Palabras: %1$d!</string>
-    <string name="back_btn">Back</string>
-    <string name="add_word">Añade una palabra…</string>
+    <string name="add_word_screen">add_word_screen</string>
+    <string name="add_word_input_placeholder">Añade una palabra…</string>
     <string name="practice_btn">Practicar</string>
+    <string name="back_btn">Back</string>
     <string name="word_list_btn">Mis Palabras</string>
     <string name="delete_word_btn">delete_word_btn</string>
     <string name="edit_word_btn">edit_word_btn</string>
